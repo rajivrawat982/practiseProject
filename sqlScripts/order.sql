@@ -1,0 +1,10 @@
+CREATE TABLE `robocafe`.`order` (
+  `orderId` BIGINT NOT NULL AUTO_INCREMENT,
+  `token` VARCHAR(100) NOT NULL,
+  `status` SMALLINT(6) NOT NULL DEFAULT 0,
+  `subTotal` FLOAT NOT NULL DEFAULT 0,
+  `tax` FLOAT NOT NULL DEFAULT 0,
+  `grandTotal` FLOAT NOT NULL DEFAULT 0,
+  `createdAt` DATETIME NOT NULL,
+  PRIMARY KEY (`orderId`));
+
