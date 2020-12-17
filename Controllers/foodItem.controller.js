@@ -20,6 +20,7 @@ var foodItem = require('../models/foodItem.model');
 // }
 
 exports.get_all_foodItem = (req , res) => {
+    console.log("foodlist request")
     foodItem.getAll( (err, data) => {
         if(err) {
             res.status(500).send({

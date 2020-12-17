@@ -10,24 +10,8 @@ exports.checkemit = () =>{
 }
 */
 
-//define the socketio [like line 19] inside the function only
-//source -- https://stackoverflow.com/questions/43604778/node-js-and-socket-io-cannot-read-property-sockets-of-undefined
 
-//get all seats data after socket connection 
-exports.seatsInfo = () => {
-    seat.getAllSeats(function(err, data) {
-        const socketio = socket.getSocketIO();
-        if(err) {
-            console.log(err);
-        } else {
-            socketio.sockets.emit('getAllseats', data);
-        }
-    })
-}
-
-
-
-//get seat info using Api calls
+//get seat info using Api calls using this in route
 exports.getAllSeats = (req, res) => {
     seat.getAllSeats(function(err, data) {
         if(err) {
@@ -52,6 +36,18 @@ exports.getAllSeats = (req, res) => {
 //     });
 // }
 
+
+//clear multiple seats selected status at a single call
+exports.clearMultipleSeats = function(seatArray) {
+    seat.clearMultipleSeatsSelection(seatArray , function(err, res) {
+        if(err) {
+            console.log(err);
+        } else {
+            console.log("seats Selection clear");
+        }
+    })
+} 
+
 exports.seatSelection = function(seat_id, selected) {
     seat.seatSelected(seat_id, selected, function(err, res) {
     
@@ -63,9 +59,39 @@ exports.seatSelection = function(seat_id, selected) {
     });
 }
 
-//using socket to update seat selection
-exports.seatSelectionStatus = function(seat_id, selected) {
+//change multiple seats booking status at single api call
+exports.seatsStatusChange = function(seatArray) {
+    seat.seatsStatusChange(seatArray , function(err, res) {
 
+        if(err) {
+            console.log(err);
+        } else {
+            console.log("seats status change");
+        }
+    })
+}
+
+
+/*------------------------------------------Sockets-----------------------------------*/
+
+
+//define the [socketio = socket.getSocketIo() ] inside the function only
+//source -- https://stackoverflow.com/questions/43604778/node-js-and-socket-io-cannot-read-property-sockets-of-undefined
+
+//get all seats data after socket connection 
+exports.seatsInfo = () => {
+    seat.getAllSeats(function(err, data) {
+        const socketio = socket.getSocketIO();
+        if(err) {
+            console.log(err);
+        } else {
+            socketio.sockets.emit('getAllseats', data);
+        }
+    })
+}
+
+//using socket to update seat selection this is we are using for sending instant updated seats detail to every screen 
+exports.seatSelectionStatus = function(seat_id, selected) {
     seat.seatSelectionStatusChange(seat_id, selected, function(err, res) {
         const socketio = socket.getSocketIO();
         if(err) {
@@ -78,19 +104,6 @@ exports.seatSelectionStatus = function(seat_id, selected) {
 }
 
 
-//change multiple seats status at single api call
-exports.seatsStatusChange = function(seatArray) {
 
-    seat.seatsStatusChange(seatArray , function(err, res) {
-
-        if(err) {
-            console.log(err);
-        } else {
-            console.log("seats status change");
-        }
-    })
-    
-
-}
 
 

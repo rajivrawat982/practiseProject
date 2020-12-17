@@ -71,7 +71,7 @@ foodItem.decreaseFoodCountById = function(itemId, result) {
                 result(err, null);
             } else {
                 
-                db.get().query("SELECT * FROM seats", (err, res) => {
+                db.get().query("SELECT * FROM foodlist", (err, res) => {
                     if(err) {
                         console.log("some error in getting food data back after update : ", err);
                         result(err, null);
@@ -97,7 +97,7 @@ foodItem.increaseFoodCountById = function(itemId, result) {
                 result(err, null);
             } else {
                 
-                db.get().query("SELECT * FROM seats", (err, res) => {
+                db.get().query("SELECT * FROM foodlist", (err, res) => {
                     if(err) {
                         console.log("some error in getting food data back after update : ", err);
                         result(err, null);

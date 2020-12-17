@@ -50,6 +50,11 @@ exports.init = function(http) {
             var itemId = data.itemId;
             foodItem.increaseFoodCountById(itemId);
         })
+
+        //receving one array consisting food objects from which use itemId and value to increase the available food amount again  
+        socket.on('clearUnorderFood' , (array) => {
+            // console.log(array);
+        } )
     })
 }
 

@@ -114,7 +114,31 @@ seat.seatsStatusChange = function(seatArray, result) {
     }
 }
 
-//handling this with sockets
+
+seat.clearMultipleSeatsSelection = function(seatArray , result) {
+    var text = seatArray[0];
+    var or =' OR ';
+    for (let i = 1; i < seatArray.length; i++) {
+        text+= or + seatArray[i];   
+    }
+    var sql = "UPDATE `seats` SET selected = 0 WHERE seatNumber = " + text;
+    try {
+        db.get().query( sql , (err, res) => {
+            if(err) {
+                console.log("some error in clearing multiple seat selection : ", err);
+                result(err, null);
+            } else {
+                result(false, res);
+            }
+        });
+    } catch (error) {
+        console.log("In catch block: ", error);
+        result(error, false);
+    }
+
+}
+
+//handling this with sockets 
 seat.seatSelectionStatusChange = function(seat_id, selected, result) {
     try {
         console.log(seat_id);

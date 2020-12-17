@@ -5,6 +5,7 @@ var routes = require('./Route');
 var mysqldb = require('./services/mysql.db.service');
 var socket = require('./services/socket.service');
 
+
 var cors = require('cors');
 
 app.use(cors());
@@ -34,7 +35,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api' , routes);
-
 
 socket.init(http);
 
