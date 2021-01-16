@@ -106,7 +106,7 @@ router.get('/barcodescanned', function(req , res) {
     console.log(req);
     res.send({
         description: 'The humanoid robot was built in 1495 by Leonardo Da vinci. The robot is clad in medieval armour that resembles the armoury of Germany and Italy',
-        url: '10.10.3.94:4000/api/video'
+        url: '10.10.3.112:4000/api/video'
     })
 })
 
