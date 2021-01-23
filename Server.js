@@ -34,6 +34,7 @@ app.get('/', (req, res) => {
     res.send('hello new testing server')
 })
 
+
 app.use('/api' , routes);
 
 socket.init(http);

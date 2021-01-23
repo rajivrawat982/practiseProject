@@ -5,15 +5,15 @@ var foodItem = require('./Controllers/foodItem.controller');
 var order = require('./Controllers/order.controller');
 var seat = require('./Controllers/seat.controller');
 
-//route for getting all food items list in mysql database
+//route for getting all food items list from mysql database
 router.get('/foodlist' , foodItem.get_all_foodItem);
 
 
-//route for getting all seats info in mysql database
+//route for getting all seats info from mysql database
 router.get('/allseats', seat.getAllSeats);
 
 
-//route to clearSeats if user didn't proceed with order or we can use while payment unsuccessful
+//route to clear Multiple Seats if user didn't proceed with order or we can use while payment unsuccessful
 router.post('/clearSeats', (req) => {
     var seats = req.body.seats;
     console.log(seats);
@@ -33,6 +33,7 @@ router.post('/addnewfood', (req, res) => {
 })
 
 
+//didn't follow up on this just added a Route 
 router.post('/neworder', (req, res) => {
  
     req = req.body;
@@ -43,7 +44,7 @@ router.post('/neworder', (req, res) => {
 
 
 
-//below route to change the seat selected status 
+//route to change the single seat selected status 
 router.put('/seatSelected', (req, res) => {
     var seat_id = req.query.seat_id;
     var selected= req.query.selected;
@@ -52,7 +53,7 @@ router.put('/seatSelected', (req, res) => {
 
 
 
-//route to change the booking status of seats
+//route to change the booking status of  multiple seats
 router.post('/seatsarrayStatusChange', (req, res) => {
     var arr = JSON.parse(req.query.array);
     console.log(arr);
@@ -60,12 +61,8 @@ router.post('/seatsarrayStatusChange', (req, res) => {
 
 });
 
-router.post('/postcheck', (req, res) => {
-    var items = req.body;
-    console.log(items);
-    console.log("some update from React side");
-})
 
+//below two Routes didn't belong to Robocafe its for Museum Mobile  Application
 
 //for video streming part in museum app not part of food app
 router.get('/video' , function(req , res) {
@@ -112,6 +109,6 @@ router.get('/barcodescanned', function(req , res) {
 
 
 
-
+ 
 
 module.exports = router;

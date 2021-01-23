@@ -19,7 +19,7 @@ exports.init = function(http) {
             console.log('A user disconnected');
         });
 
-
+        //change seat selection status using socket so its update in parallel screens as well
         socket.on('seatSelected', (data) => {
 
             console.log(data);
@@ -32,12 +32,14 @@ exports.init = function(http) {
         //this will call function which send seats info using socket emit event 'getAllseat'  
         seat.seatsInfo();
 
+
+        //when user select the food
         socket.on('foodSelected', (data) => {
             var food_Id = data.itemId;
             foodItem.getFoodById(food_Id);
         })
         
-        socket.emit('seatStatus' , 1);
+        // socket.emit('seatStatus' , 1);
 
         //socket events for increase-decrease the food amount available in pantery we are updating this in every plus minus click
         socket.on('decreaseAmount' , (data) => {
